@@ -1,17 +1,44 @@
 .matrixForm {
 	background: #1ba59e;
-	padding: 15px 50px;
+	padding: 15px 160px;
 }
 .title {
 	color: #f5f827;
 	font-size: 55px;
 	margin: 0;
+	margin-bottom: 25px;
 }
 .formText {
 	color: #ffffff;
 	font-weight: bold;
-	margin-top: 15px;
 }
 .inputNumber {
-	width: 40px;
+	width: 60px;
+	height: 25px;
+	margin-left: 105px;
+	border-radius: 5px;
+	border: transparent;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+	outline: none;
+}
+.firstInputNumber {
+	width: 60px;
+	height: 25px;
+	margin-left: 80px;
+	border-radius: 5px;
+	border: transparent;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+	outline: none;
+}
+.createMatrixBtn {
+	font-size: 20px;
+	color: #f5f827;
+	padding: 10px 15px;
+	border-radius: 10px;
+	border: transparent;
+	cursor: pointer;
+	background: rgb(37, 161, 233);
+}
+.formTextBlock {
+	margin-bottom: 20px;
 }
