@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import s from './MatrixForm.module.css';
+import s from './MatrixForm.module.scss';
 
 const MatrixForm: FC = () => {
 	return (
