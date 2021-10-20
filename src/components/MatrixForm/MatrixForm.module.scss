@@ -1,18 +1,18 @@
-.matrixForm {
+.matrix_form {
 	background: #1ba59e;
 	padding: 15px 160px;
 }
-.title {
+.matrix_form__title {
 	color: #f5f827;
 	font-size: 55px;
 	margin: 0;
 	margin-bottom: 25px;
 }
-.formText {
+.matrix_form__text {
 	color: #ffffff;
 	font-weight: bold;
 }
-.inputNumber {
+.matrix_form__input {
 	width: 60px;
 	height: 25px;
 	margin-left: 105px;
@@ -21,7 +21,7 @@
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 	outline: none;
 }
-.firstInputNumber {
+.matrix_form__first_input {
 	width: 60px;
 	height: 25px;
 	margin-left: 80px;
@@ -30,15 +30,16 @@
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 	outline: none;
 }
-.createMatrixBtn {
+.matrix_form__button {
 	font-size: 20px;
 	color: #f5f827;
 	padding: 10px 15px;
 	border-radius: 10px;
 	border: transparent;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 	cursor: pointer;
 	background: rgb(37, 161, 233);
 }
-.formTextBlock {
+.matrix_form__block {
 	margin-bottom: 20px;
 }
