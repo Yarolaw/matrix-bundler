@@ -1,0 +1,17 @@
+.matrixForm {
+	background: #1ba59e;
+	padding: 15px 50px;
+}
+.title {
+	color: #f5f827;
+	font-size: 55px;
+	margin: 0;
+}
+.formText {
+	color: #ffffff;
+	font-weight: bold;
+	margin-top: 15px;
+}
+.inputNumber {
+	width: 40px;
+}
