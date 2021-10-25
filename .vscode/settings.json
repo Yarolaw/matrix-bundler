@@ -1,0 +1,7 @@
+{
+    "prettier.configPath": ".prettierrc",
+    "prettier.prettierPath": ".prettierrc",
+    "prettier.printWidth": 120,
+    "prettier.jsxSingleQuote": true,
+    "prettier.requireConfig": true
+}
