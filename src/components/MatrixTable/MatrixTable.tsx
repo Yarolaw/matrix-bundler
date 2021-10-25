@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 const MatrixTable: FC = () => {
-	const rundomNumber = () => Math.floor(Math.random() * 1000);
+	const rundomNumber = (): number => Math.floor(Math.random() * 1000);
 	return (
 		<div>
 			<button type="button">Add row</button>
@@ -18,6 +18,14 @@ const MatrixTable: FC = () => {
 					</tr>
 				</thead>
 				<tbody>
+					{/* {matrix.map((row, index) => (
+						<tr>
+							<th scope="row">{index + 1}</th>
+							{row.map(element => (
+								<td>{element.amount}</td>
+							))}
+						</tr>
+					))} */}
 					<tr>
 						<th scope="row">1</th>
 						<td>{rundomNumber()}</td>

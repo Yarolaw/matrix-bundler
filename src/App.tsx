@@ -7,7 +7,7 @@ const App: FC = () => {
 	return (
 		<div className="App">
 			<MatrixForm />
-			<MatrixTable />
+			{/* <MatrixTable /> */}
 		</div>
 	);
 };
