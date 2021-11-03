@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { calcPercentOfSumRow } from '../../core/functions';
 import { ICell } from '../../core/interfaces';
@@ -20,14 +20,14 @@ type MatrixRowProps = {
 const MatrixRow: FC<MatrixRowProps> = ({ row, rowName, rowIndex }) => {
 	const [isSumHovered, setIsSumHovered] = useState(false);
 
-	const { deleteRow, incrementFrame, onCellHover, onMouseLeave } = MatrixSlice.actions;
+	const { deleteRow, incrementCell, onCellHover, onCellLeave } = MatrixSlice.actions;
 
 	const dispatch = useDispatch();
 
 	const sumRow = row.reduce((acc, el) => acc + el.amount, 0);
 	const percentOfSumRow = useCallback((element: ICell) => calcPercentOfSumRow(element, sumRow), [sumRow]);
 
-	const nearestArr = useSelector((state: StoreType) => state.matrixReducer.closesIdArr);
+	const nearestArr = useSelector((state: StoreType) => state.matrixReducer.closestIdsArr);
 
 	return (
 		<tr>
@@ -35,9 +35,9 @@ const MatrixRow: FC<MatrixRowProps> = ({ row, rowName, rowIndex }) => {
 			{row.map(element => (
 				<td
 					key={element.id}
-					onClick={() => dispatch(incrementFrame(element.id))}
+					onClick={() => dispatch(incrementCell(element.id))}
 					onMouseEnter={() => dispatch(onCellHover(element))}
-					onMouseLeave={() => dispatch(onMouseLeave(true))}
+					onMouseLeave={() => dispatch(onCellLeave(true))}
 					style={
 						isSumHovered
 							? {

@@ -1,14 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { FC, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import s from './MatrixForm.module.scss';
 
-import MatrixRow from '../MatrixRow/MatrixRow';
-import AvgRow from '../AvgRow/AvgRow';
-
 import { MatrixSlice } from '../../redux/MatrixSlice';
-import { StoreType } from '../../redux/store';
 import SettingField from './SettingField';
 
 const MatrixForm: FC = () => {
@@ -16,35 +12,9 @@ const MatrixForm: FC = () => {
 	const [rows, setRows] = useState<number>(0);
 	const [cells, setCells] = useState<number>(0);
 
-	const { setMatrixSettings, addRow } = MatrixSlice.actions;
+	const { setMatrixSettings } = MatrixSlice.actions;
 
 	const dispatch = useDispatch();
-
-	const matrixRecords = useSelector((state: StoreType) => state.matrixReducer.matrix);
-
-	const average = useMemo(() => {
-		if (!matrixRecords.length) return null;
-		let sumAr: Array<number> = [];
-
-		for (let i = 0; i < matrixRecords[0].length; i++) {
-			let currentSum = 0;
-			for (let j = 0; j < matrixRecords.length; j++) {
-				currentSum += matrixRecords[j][i].amount;
-			}
-			sumAr = [...sumAr, Math.round(currentSum / matrixRecords.length)];
-		}
-		return sumAr;
-	}, [matrixRecords]);
-
-	const sumAvg = useMemo(
-		() =>
-			!average
-				? null
-				: average.reduce((acc, el) => {
-						return acc + el;
-				  }, 0),
-		[average]
-	);
 
 	const submitSettings = () => {
 		if (columns && rows) {
@@ -77,7 +47,7 @@ const MatrixForm: FC = () => {
 				</button>
 			</div>
 
-			<div>
+			{/* <div>
 				{!!matrixRecords.length && (
 					<>
 						<button type="button" onClick={() => dispatch(addRow(columns))} className={s.addRowBtn}>
@@ -98,12 +68,12 @@ const MatrixForm: FC = () => {
 								{matrixRecords.map((row, index) => (
 									<MatrixRow key={row[0].id} row={row} rowName={index + 1} rowIndex={index} />
 								))}
-								<AvgRow average={average} sumAvg={sumAvg} />
+								<AvgRow />
 							</tbody>
 						</table>
 					</>
 				)}
-			</div>
+			</div> */}
 		</>
 	);
 };
