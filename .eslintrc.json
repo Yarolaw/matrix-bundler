@@ -22,6 +22,8 @@
         "prettier"
     ],
     "rules": {
+        "no-plusplus": 0,
+        "no-unused-vars":"warn",
         "prettier/prettier": [
             "error",
             {

@@ -1,0 +1,21 @@
+.matrixForm {
+	&__text {
+		color: #ffffff;
+		font-weight: bold;
+	}
+
+	&__input {
+		width: 60px;
+		height: 25px;
+		border-radius: 5px;
+		border: transparent;
+		box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+		outline: none;
+	}
+
+	&__block {
+		margin-bottom: 20px;
+		display: flex;
+		justify-content: space-between;
+	}
+}
