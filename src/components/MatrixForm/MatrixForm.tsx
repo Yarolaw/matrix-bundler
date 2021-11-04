@@ -1,163 +1,79 @@
-import { FC, useEffect, useState } from 'react';
-import { nanoid } from 'nanoid';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import s from './MatrixForm.module.scss';
 
-interface ICell {
-	id: number | string;
-	amount: number;
-}
+import { MatrixSlice } from '../../redux/MatrixSlice';
+import SettingField from './SettingField';
 
-const createMatrix = (rows: number, columns: number) => {
-	let matrix: Array<Array<ICell>> = [];
-	for (let i = 0; i < rows; i++) {
-		matrix = [...matrix, []];
-	}
-	const readyMatrix = matrix.map(arr => {
-		for (let i = 0; i < columns; i++) {
-			const newElement: ICell = {
-				id: nanoid(),
-				amount: Math.floor(Math.random() * 1000),
-			};
-			// eslint-disable-next-line no-param-reassign
-			arr = [...arr, newElement];
-		}
-		return arr;
-	});
-	return readyMatrix;
-};
-
-const avg = (currentMatrix: Array<Array<ICell>>, columnsNumber: number, rowsNumber: number) => {
-	let sumAr: Array<number> = [];
-	for (let i = 0; i < columnsNumber; i++) {
-		let currentSum = 0;
-		for (let j = 0; j < rowsNumber; j++) {
-			currentSum += currentMatrix[j][i].amount;
-		}
-		sumAr = [...sumAr, Math.round(currentSum / rowsNumber)];
-	}
-	return sumAr;
-};
 const MatrixForm: FC = () => {
-	const [columns, setColumns] = useState<number | null>(null);
-	const [rows, setRows] = useState<number | null>(null);
-	const [cells, setCells] = useState<number | null>(null);
-	const [matrix, setMatrix] = useState<Array<Array<ICell>>>([]);
-	const [average, setAverage] = useState<Array<number>>([]);
+	const [columns, setColumns] = useState<number>(0);
+	const [rows, setRows] = useState<number>(0);
+	const [cells, setCells] = useState<number>(0);
 
-	const sumAvg = average.reduce((acc, el) => {
-		return acc + el;
-	}, 0);
+	const { setMatrixSettings } = MatrixSlice.actions;
 
-	const handleClick = () => {
+	const dispatch = useDispatch();
+
+	const submitSettings = () => {
 		if (columns && rows) {
-			const newMatrix = createMatrix(rows, columns);
-			setMatrix(newMatrix);
+			dispatch(setMatrixSettings({ rows, columns, cells }));
 		}
 	};
-
-	const sum = matrix.map(row => {
-		const sumArr = row.reduce((acc, el) => {
-			return acc + el.amount;
-		}, 0);
-
-		return sumArr;
-	});
-
-	const handleAddRow = () => {
-		if (columns && rows) {
-			setRows(rows + 1);
-			setMatrix(prev => [...prev, createMatrix(1, columns).flat()]);
-		}
-	};
-
-	useEffect(() => {
-		if (columns && rows) {
-			setAverage(avg(matrix, columns, rows));
-		}
-	}, [matrix]);
 
 	return (
 		<>
 			<div className={s.matrixForm}>
 				<h2 className={s.matrixForm__title}>Matrix builder</h2>
-				<div className={s.matrixForm__block}>
-					<span className={s.matrixForm__text}>Enter the number of columns</span>
-					<input
-						value={columns || ''}
-						className={s.matrixForm__input}
-						type="number"
-						onChange={e => setColumns(Number(e.target.value))}
-						min="1"
-						max="9999"
-					/>
-				</div>
-				<div className={s.matrixForm__block}>
-					<span className={s.matrixForm__text}>Enter the number of rows</span>
-					<input
-						value={rows || ''}
-						onChange={e => setRows(Number(e.target.value))}
-						className={s.matrixForm__input}
-						type="number"
-						min="1"
-						max="9999"
-					/>
-				</div>
-				<div className={s.matrixForm__block}>
-					<span className={s.matrixForm__text}>Enter the number of cells</span>
-					<input
-						value={cells || ''}
-						onChange={e => setCells(Number(e.target.value))}
-						className={s.matrixForm__input}
-						type="number"
-						min="1"
-						max="9999"
-					/>
-				</div>
+				<SettingField
+					title="Enter the number of columns"
+					value={columns}
+					changeHandler={(columnsValue: number) => setColumns(columnsValue)}
+				/>
+				<SettingField
+					title="Enter the number of rows"
+					value={rows}
+					changeHandler={(rowsValue: number) => setRows(rowsValue)}
+				/>
+				<SettingField
+					title="Enter the number of cells"
+					value={cells}
+					changeHandler={(cellsValue: number) => setCells(cellsValue)}
+				/>
 
-				<button className={s.matrixForm__button} onClick={handleClick} type="button">
+				<button className={s.matrixForm__button} onClick={submitSettings} type="button">
 					Create matrix
 				</button>
 			</div>
 
-			<div>
-				{!!matrix.length && (
+			{/* <div>
+				{!!matrixRecords.length && (
 					<>
-						<button type="button" onClick={handleAddRow} className={s.addRowBtn}>
+						<button type="button" onClick={() => dispatch(addRow(columns))} className={s.addRowBtn}>
 							Add row
 						</button>
 
-						<table className="table table-success table-striped">
+						<table className="table myTable">
 							<thead>
 								<tr>
 									<th scope="col">№</th>
-									{new Array(columns).fill(null).map((_, index) => (
+									{new Array(matrixRecords[0].length).fill(null).map((_, index) => (
 										<th scope="col">{index + 1}</th>
 									))}
 									<th scope="col">Sum</th>
 								</tr>
 							</thead>
 							<tbody>
-								{matrix.map((row, index) => (
-									<tr>
-										<th scope="row">{index + 1}</th>
-										{row.map(element => (
-											<td>{element.amount}</td>
-										))}
-										<th scope="row">{sum[index]}</th>
-									</tr>
+								{matrixRecords.map((row, index) => (
+									<MatrixRow key={row[0].id} row={row} rowName={index + 1} rowIndex={index} />
 								))}
-								<tr>
-									<th scope="row">Avg</th>
-									{average.map((_, index) => {
-										return <th scope="row">{average[index]}</th>;
-									})}
-									<th scope="row">{sumAvg}</th>
-								</tr>
+								<AvgRow />
 							</tbody>
 						</table>
 					</>
 				)}
-			</div>
+			</div> */}
 		</>
 	);
 };

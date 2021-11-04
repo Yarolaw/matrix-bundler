@@ -1,64 +1,35 @@
 import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { MatrixSlice } from '../../redux/MatrixSlice';
+import { StoreType } from '../../redux/store';
+
+import TableHead from './TableHead/TableHead';
+import s from './MatrixTable.module.scss';
+import TableBody from './TableBody/TableBody';
 
 const MatrixTable: FC = () => {
-	const rundomNumber = (): number => Math.floor(Math.random() * 1000);
+	const matrixRecords = useSelector((state: StoreType) => state.matrixReducer.matrix);
+	const columns = useSelector((state: StoreType) => state.matrixReducer.columns);
+
+	const dispatch = useDispatch();
+	const { addRow } = MatrixSlice.actions;
+
 	return (
 		<div>
-			<button type="button">Add row</button>
+			{!matrixRecords.length ? (
+				<span>At first, set settings for matrix</span>
+			) : (
+				<>
+					<button type="button" onClick={() => dispatch(addRow(columns))} className={s.addRowBtn}>
+						Add row
+					</button>
 
-			<table className="table">
-				<thead>
-					<tr>
-						<th scope="col">№</th>
-						<th scope="col">1</th>
-						<th scope="col">2</th>
-						<th scope="col">3</th>
-						<th scope="col">4</th>
-						<th scope="col">Sum</th>
-					</tr>
-				</thead>
-				<tbody>
-					{/* {matrix.map((row, index) => (
-						<tr>
-							<th scope="row">{index + 1}</th>
-							{row.map(element => (
-								<td>{element.amount}</td>
-							))}
-						</tr>
-					))} */}
-					<tr>
-						<th scope="row">1</th>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-					</tr>
-					<tr>
-						<th scope="row">4</th>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-						<td>{rundomNumber()}</td>
-					</tr>
-					<tr>
-						<th scope="row">Avg</th>
-					</tr>
-				</tbody>
-			</table>
+					<table className="table myTable">
+						<TableHead />
+						<TableBody />
+					</table>
+				</>
+			)}
 		</div>
 	);
 };
