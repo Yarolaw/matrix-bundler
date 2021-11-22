@@ -2,7 +2,7 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable no-debugger */
 /* eslint-disable no-param-reassign */
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { createMatrix } from '../core/functions';
 import { ICell } from '../core/interfaces';
 
