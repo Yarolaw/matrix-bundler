@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/matrix-bundler/static/css/main.4b1a727c.chunk.css",
+    "main.js": "/matrix-bundler/static/js/main.2f4636be.chunk.js",
+    "main.js.map": "/matrix-bundler/static/js/main.2f4636be.chunk.js.map",
+    "runtime-main.js": "/matrix-bundler/static/js/runtime-main.1a43c580.js",
+    "runtime-main.js.map": "/matrix-bundler/static/js/runtime-main.1a43c580.js.map",
+    "static/js/2.6da56eb8.chunk.js": "/matrix-bundler/static/js/2.6da56eb8.chunk.js",
+    "static/js/2.6da56eb8.chunk.js.map": "/matrix-bundler/static/js/2.6da56eb8.chunk.js.map",
+    "static/js/3.4bdcd839.chunk.js": "/matrix-bundler/static/js/3.4bdcd839.chunk.js",
+    "static/js/3.4bdcd839.chunk.js.map": "/matrix-bundler/static/js/3.4bdcd839.chunk.js.map",
+    "index.html": "/matrix-bundler/index.html",
+    "static/css/main.4b1a727c.chunk.css.map": "/matrix-bundler/static/css/main.4b1a727c.chunk.css.map",
+    "static/js/2.6da56eb8.chunk.js.LICENSE.txt": "/matrix-bundler/static/js/2.6da56eb8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1a43c580.js",
+    "static/js/2.6da56eb8.chunk.js",
+    "static/css/main.4b1a727c.chunk.css",
+    "static/js/main.2f4636be.chunk.js"
+  ]
+}
